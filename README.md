@@ -1,68 +1,68 @@
-# 🩸 Automação de Dados de Saúde — DATASUS
+# Health Data Automation - DATASUS
 
-Script em **Python + pandas** que limpa e padroniza uma extração do **DATASUS** sobre
-quantidade de bolsas de sangue por município do Paraná e gera uma planilha pronta
-para análise.
+A Python and pandas script that cleans and standardizes a DATASUS export on the number
+of blood bags per municipality in the state of Paraná, producing a spreadsheet ready
+for analysis.
 
-## 🎯 Problema
+## Problem
 
-A exportação do DATASUS traz o nome do município colado ao código do IBGE
-(`410690 CURITIBA`), entre aspas, em caixa alta, e inclui linhas sem valor.
-Assim não dá para cruzar com outras bases nem apresentar direto.
+The DATASUS export glues the municipality name to its IBGE code (`410690 CURITIBA`),
+wraps it in quotes, uses all caps, and includes rows with no value. In that shape it
+cannot be joined with other datasets or presented directly.
 
-## 🔄 O que o script faz
+## What the script does
 
-**Entrada:** `raw/municipio.csv` (separado por `;`)
+**Input:** `raw/municipio.csv` (semicolon-separated)
 
-1. Remove o código numérico do IBGE do início do nome do município
-2. Remove aspas e espaços sobrando
-3. Padroniza o texto para Nome Próprio (`Foz Do Iguacu`)
-4. Renomeia a coluna de valor para `Quantidade de Bolsas de Sangue`
-5. Converte os valores para número e descarta municípios sem registro (total ≤ 0)
+1. Removes the leading IBGE numeric code from the municipality name
+2. Strips quotes and surrounding whitespace
+3. Normalizes the text to title case (`Foz Do Iguacu`)
+4. Renames the value column to `Quantidade de Bolsas de Sangue`
+5. Converts the values to numbers and drops municipalities with no record (total <= 0)
 
-**Saída:** `clean/clean_data.xlsx`
+**Output:** `clean/clean_data.xlsx`
 
-## 🛠️ Tecnologias
+## Tech
 
 - Python 3
 - pandas
-- openpyxl (escrita do `.xlsx`)
+- openpyxl (`.xlsx` writing)
 
-## 📁 Estrutura
+## Structure
 
 ```
 .
 ├── raw/
-│   ├── extracaohemobanco.py   # script de limpeza
-│   └── municipio.csv          # dados brutos do DATASUS
+│   ├── extracaohemobanco.py   # cleaning script
+│   └── municipio.csv          # raw DATASUS data
 └── clean/
-    └── clean_data.xlsx        # resultado
+    └── clean_data.xlsx        # result
 ```
 
-## ▶️ Como executar
+## Running
 
 ```bash
 pip install pandas openpyxl
 python raw/extracaohemobanco.py
 ```
 
-Os caminhos são resolvidos a partir do próprio script, então funciona de qualquer
-diretório. O arquivo `clean/clean_data.xlsx` é sobrescrito a cada execução.
+Paths are resolved relative to the script itself, so it runs from any directory.
+`clean/clean_data.xlsx` is overwritten on each run.
 
-## 📊 Sobre os dados
+## About the data
 
-Dados públicos e **agregados por município** (DATASUS / hemocentros do Paraná).
-Não há informação pessoal.
+Public data, aggregated by municipality (DATASUS / Paraná blood centers). No personal
+information.
 
-## 👤 Autoria
+## Authorship
 
-Desenvolvido por **Giovanna Ribas dos Reis** — projeto individual.
+Written by Giovanna Ribas dos Reis - individual project.
 
-## 🧭 Próximos passos possíveis
+## Next steps
 
-- Receber o nome do arquivo de entrada por parâmetro, em vez de fixo no código
-- Detectar a coluna de ano automaticamente, em vez do valor `'2026'` fixo
+- Accept the input file name as a parameter instead of hard-coding it
+- Detect the year column automatically instead of the fixed `'2026'` value
 
-## 🤖 Transparência
+## Transparency
 
-O código deste projeto é de autoria própria, sem geração por IA.
+The code in this project is my own work, not AI-generated.
