@@ -22,6 +22,8 @@ cannot be joined with other datasets or presented directly.
 
 **Output:** `clean/clean_data.xlsx`
 
+![Before and after the cleaning script](docs/before-after.png)
+
 ## Tech
 
 - Python 3
