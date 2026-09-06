@@ -1,8 +1,9 @@
 import pandas as pd
-import os
+from pathlib import Path
 
-arquivo = r'raw\municipio.csv'
-arquivo_novo = r'clean\clean_data.xlsx'
+BASE = Path(__file__).resolve().parent.parent
+arquivo = BASE / 'raw' / 'municipio.csv'
+arquivo_novo = BASE / 'clean' / 'clean_data.xlsx'
 
 try:
     df = pd.read_csv(arquivo, sep=';', encoding='utf-8')
@@ -14,12 +15,13 @@ try:
     df.rename(columns={'2026':'Quantidade de Bolsas de Sangue'}, inplace=True)
 
     df[col_total] = pd.to_numeric(df[col_total], errors='coerce')
-    df = df[df[col_total] > 0] 
-    
+    df = df[df[col_total] > 0]
+
     df[col_total] = df[col_total].astype(int)
 
-    os.makedirs(r'test_\clean', exist_ok=True)
+    arquivo_novo.parent.mkdir(parents=True, exist_ok=True)
     df.to_excel(arquivo_novo, index=False)
-    
+    print(f'Arquivo gerado: {arquivo_novo}')
+
 except Exception as e:
-    print(f" Ocorreu um erro: {e}")
+    print(f' Ocorreu um erro: {e}')
