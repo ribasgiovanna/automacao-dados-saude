@@ -1,5 +1,7 @@
 # Health Data Automation - DATASUS
 
+English · [Português](README.pt-br.md)
+
 A Python and pandas script that cleans and standardizes a DATASUS export on the number
 of blood bags per municipality in the state of Paraná, producing a spreadsheet ready
 for analysis.
